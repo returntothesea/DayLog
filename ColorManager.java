@@ -25,6 +25,8 @@ public class ColorManager {
 	private static final String CREATE_PANEL_BACKGROUND = "#007bae";
 
 	private static final String HIGHLIGHTED = "#FF7F50";
+
+	private static final String REMOVING = "#00212f";
 	
 	
 
@@ -86,5 +88,9 @@ public class ColorManager {
 
 	public static String getHighlighted() {
 		return HIGHLIGHTED;
+	}
+
+	public static String getRemoving() {
+		return REMOVING;
 	}
 }

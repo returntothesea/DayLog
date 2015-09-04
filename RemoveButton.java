@@ -15,19 +15,25 @@ public class RemoveButton extends Button {
 	}
 
 	public class BListener implements MouseListener {
-		public void mouseExited(MouseEvent e) {}
-		public void mouseEntered(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {
+			if (off) {
+				colorFlip();
+			}
+		}
+		public void mouseEntered(MouseEvent e) {
+			if (off) {
+				colorFlip();
+			}
+		}
 		public void mouseClicked(MouseEvent e) {}
 		public void mousePressed(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {
 			if (off) {
-				colorFlip();
 
 				Controller.get().toggleEditing();
 				off = false;
 
 			} else {
-				colorFlip();
 
 				Controller.get().toggleEditing();
 				off = true;

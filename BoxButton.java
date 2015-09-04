@@ -32,15 +32,18 @@ public class BoxButton extends JLabel {
 
 	public class BListener implements MouseListener {
 		public void mouseExited(MouseEvent e) {
-			if (Controller.get().isEditing()) {
 				button.setBackground(Color.decode(ColorManager.getBoxButtonBackground()));
 				button.setForeground(Color.decode(ColorManager.getBoxButtonText()));
 				button.revalidate();
 				button.repaint();
-			}
 		}
 		public void mouseEntered(MouseEvent e) {
 			if (Controller.get().isEditing()) {
+				setBackground(Color.decode(ColorManager.getRemoving()));
+				button.setForeground(Color.decode(ColorManager.getRemoving()));
+				button.revalidate();
+				button.repaint();
+			} else {
 				setBackground(Color.decode(ColorManager.getHighlighted()));
 				button.setForeground(Color.decode(ColorManager.getBoxButtonText()));
 				button.revalidate();
@@ -67,6 +70,10 @@ public class BoxButton extends JLabel {
 				} else {
 					Controller.get().clearLog();
 					Controller.get().logSetup();
+					DateFormat timeStampFormat = new SimpleDateFormat("hh:mm a");
+					String stamp = new String(timeStampFormat.format(time));
+					String send = new String("[" + stamp + "] " + buttonText);
+					Controller.get().addToList(send);
 				}
 			}
 		}
