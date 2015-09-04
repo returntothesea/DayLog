@@ -49,6 +49,7 @@ public class BoxButton extends JLabel {
 			if (Controller.get().isEditing()) {
 				Controller.get().removeButton(buttonText);
 				Controller.get().toggleEditing();
+				RemoveButton.colorFlip();
 			} else {
 				DateFormat timeStampFormat = new SimpleDateFormat("hh:mm a");
 				Date time = new Date();

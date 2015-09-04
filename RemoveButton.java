@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class RemoveButton extends Button {
-	RemoveButton button;
+	private static RemoveButton button;
 	private Boolean off = true;
 	public RemoveButton() {
 		button = this;
@@ -18,16 +18,13 @@ public class RemoveButton extends Button {
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseClicked(MouseEvent e) {
 			if (off) {
-				button.setOpaque(true);
-				button.setForeground(Color.WHITE);
+				colorFlip();
 
 				Controller.get().toggleEditing();
-				System.out.println("Editing");
 				off = false;
 
 			} else {
-				button.setOpaque(false);
-				button.setForeground(Color.BLACK);
+				colorFlip();
 
 				Controller.get().toggleEditing();
 				off = true;
@@ -35,5 +32,19 @@ public class RemoveButton extends Button {
 		}
 		public void mousePressed(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
+	}
+
+	public RemoveButton get() {
+		return button;
+	}
+
+	public static void colorFlip() {
+		if (button.isOpaque() == true) {
+			button.setOpaque(false);
+			button.setForeground(Color.BLACK);
+		} else {
+			button.setOpaque(true);
+			button.setForeground(Color.WHITE);
+		}
 	}
 }
