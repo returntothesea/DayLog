@@ -11,13 +11,13 @@ import java.util.Calendar;
 
 public class BoxButton extends JLabel {
 	String buttonText;
-	//Controller controller = Controller.get();
-
+	BoxButton button;
 	public BoxButton(String s) {
+		setBackground(Color.RED);
+		button = this;
 		setText(s);
 		buttonText = s;
 		
-		//Border Compound2;
 		Border blackLine = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
 		Border blank = BorderFactory.createEmptyBorder(50, 50, 50, 50);
 
@@ -29,14 +29,33 @@ public class BoxButton extends JLabel {
 	}
 
 	public class BListener implements MouseListener {
-		public void mouseExited(MouseEvent e) {}
-		public void mouseEntered(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {
+			if (Controller.get().isEditing()) {
+				button.setOpaque(false);
+				button.setForeground(Color.BLACK);
+				button.revalidate();
+				button.repaint();
+			}
+		}
+		public void mouseEntered(MouseEvent e) {
+			if (Controller.get().isEditing()) {
+				button.setOpaque(true);
+				button.setForeground(Color.WHITE);
+				button.revalidate();
+				button.repaint();
+			}
+		}
 		public void mouseClicked(MouseEvent e) {
-			DateFormat timeStampFormat = new SimpleDateFormat("hh:mm a");
-			Date time = new Date();
-			String stamp = new String(timeStampFormat.format(time));
-			String send = new String("[" + stamp + "] " + buttonText);
-			Controller.get().addToList(send);
+			if (Controller.get().isEditing()) {
+				Controller.get().removeButton(buttonText);
+				Controller.get().toggleEditing();
+			} else {
+				DateFormat timeStampFormat = new SimpleDateFormat("hh:mm a");
+				Date time = new Date();
+				String stamp = new String(timeStampFormat.format(time));
+				String send = new String("[" + stamp + "] " + buttonText);
+				Controller.get().addToList(send);
+			}
 		}
 		public void mousePressed(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}

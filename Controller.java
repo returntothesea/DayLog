@@ -24,6 +24,7 @@ import java.io.FileWriter;
 public class Controller {
 
 	ArrayList<String> al;
+	ArrayList<String> buttonsList;
 	DateFormat fileNameFormat;
 	String fileName;
 	File file;
@@ -32,7 +33,7 @@ public class Controller {
 	LogPanel logPanel;
 	BotPanel botPanel;
 	NewPanel newPanel;
-	Boolean editing = false;
+	private Boolean editing = false;
 
 	private static Controller instance;
 
@@ -65,8 +66,9 @@ public class Controller {
 	}
 
 	private void botSetup() {
-		botPanel.add(new SaveButton(), BorderLayout.SOUTH);
+		botPanel.add(new SaveButton());
 		botPanel.add(newPanel);
+		botPanel.add(new RemoveButton());
 	}
 
 	private void mainSetup() {
@@ -74,14 +76,24 @@ public class Controller {
 			File f = new File("actions/actions.txt");
 			BufferedReader br = new BufferedReader(new FileReader(f));
 			String s = null;
+			buttonsList = new ArrayList<String>();
 			while ((s = br.readLine()) != null) {
-				mainPanel.add(new BoxButton(s), BorderLayout.NORTH);	// [CODE NEEDED TO ADD BUTTONS]
+				buttonsList.add(s);
+				//mainPanel.add(new BoxButton(s), BorderLayout.NORTH);
 			}
 			br.close();
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		
+		populateMainPanel();
+		//mainPanel.revalidate();
+		//mainPanel.repaint();
+	}
+
+	private void populateMainPanel() {
+		for (int x = 0; x < buttonsList.size(); x++) {
+			mainPanel.add(new BoxButton(buttonsList.get(x)));
+		}
 		mainPanel.revalidate();
 		mainPanel.repaint();
 	}
@@ -103,8 +115,6 @@ public class Controller {
 		}
 
 		populateLogPanel();
-
-		
 	}
 
 	private void populateLogPanel() {
@@ -151,22 +161,51 @@ public class Controller {
 		System.out.println("Saved");
 	}
 
-	public void addButton(String s) {
+	public void saveButtons() {
 		File f = new File("actions/actions.txt");
 		try {
-			FileWriter fw = new FileWriter(f, true);
+			FileWriter fw = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(System.getProperty("line.separator") + s);
+			for (int x = 0; x < buttonsList.size(); x++) {
+				bw.write(buttonsList.get(x) + System.getProperty("line.separator"));
+			}
 			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void save() {
+		saveLog();
+		saveButtons();
+	}
+
+	public void addButton(String s) {
+		buttonsList.add(s);
 		reload();
 	}
 
 	public void reload() {
 		mainPanel.removeAll();
-		mainSetup();
+		populateMainPanel();
 	}
 
+	public void toggleEditing() {
+		if (editing == false) {
+			editing = true;
+		} else {
+			editing = false;
+		}
+	}
+
+	public boolean isEditing() {
+		return editing;
+	}
+
+	public void removeButton(String s) {
+		if (buttonsList.contains(s)) {
+			buttonsList.remove(s);
+		}
+		reload();
+	}
 }

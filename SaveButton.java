@@ -13,7 +13,7 @@ public class SaveButton extends Button {
 		public void mouseExited(MouseEvent e) {}
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseClicked(MouseEvent e) {
-			Controller.get().saveLog();
+			Controller.get().save();
 		}
 		public void mousePressed(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
