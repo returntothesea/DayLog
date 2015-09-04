@@ -17,6 +17,7 @@ public class Run {
 		panel.setPreferredSize(new Dimension(800, 700));
 		panel.add(MainPanel.get());
 		panel.add(BotPanel.get());
+		panel.setBackground(Color.decode(ColorManager.getMainPanelBackground()));
 		frame.add(panel);
 
 

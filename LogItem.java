@@ -8,7 +8,8 @@ public class LogItem extends JLabel {
 	LogItem item;
 	String text;
 	public LogItem(String s) {
-		setBackground(Color.RED);
+		setBackground(Color.decode(ColorManager.getHighlighted()));
+		setForeground(Color.decode(ColorManager.getLogPanelText()));
 		text = s;
 		setText(s);
 		Border b = BorderFactory.createEmptyBorder(3, 0, 3, 0);
@@ -20,7 +21,7 @@ public class LogItem extends JLabel {
 	public class BListener implements MouseListener {
 		public void mouseExited(MouseEvent e) {
 			item.setOpaque(false);
-			item.setForeground(Color.BLACK);
+			item.setForeground(Color.decode(ColorManager.getLogPanelText()));;
 			item.setText(text);
 			item.revalidate();
 			item.repaint();
@@ -32,11 +33,11 @@ public class LogItem extends JLabel {
 			item.revalidate();
 			item.repaint();
 		}
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {
 			Controller.get().removeItem(text);
 		}
-		public void mousePressed(MouseEvent e) {}
-		public void mouseReleased(MouseEvent e) {}
 	}
 
 

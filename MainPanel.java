@@ -7,7 +7,8 @@ public class MainPanel extends JPanel {
 	private static MainPanel instance;
 
 	private MainPanel() {
-		setPreferredSize(new Dimension(800, 600));
+		setPreferredSize(new Dimension(800, 550));
+		setBackground(Color.decode(ColorManager.getMainPanelBackground()));
 	}
 
 	public static MainPanel get() {

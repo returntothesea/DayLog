@@ -11,7 +11,8 @@ public class LogPanel extends JPanel {
 		Dimension dim = new Dimension(300, 700);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setPreferredSize(dim);
-		setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, Color.BLACK));
+		setBackground(Color.decode(ColorManager.getLogPanelBackground()));
+		setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, Color.decode(ColorManager.getLogPanelBorder())));
 	}
 
 	public static LogPanel get() {

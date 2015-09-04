@@ -13,12 +13,14 @@ public class BoxButton extends JLabel {
 	String buttonText;
 	BoxButton button;
 	public BoxButton(String s) {
-		setBackground(Color.RED);
+		setForeground(Color.decode(ColorManager.getBoxButtonText()));
+		setBackground(Color.decode(ColorManager.getBoxButtonBackground()));
+		setOpaque(true);
 		button = this;
 		setText(s);
 		buttonText = s;
 		
-		Border blackLine = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
+		Border blackLine = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.decode(ColorManager.getBoxButtonBorder()));
 		Border blank = BorderFactory.createEmptyBorder(50, 50, 50, 50);
 
 		Border compound = BorderFactory.createCompoundBorder(blackLine, blank);
@@ -31,21 +33,23 @@ public class BoxButton extends JLabel {
 	public class BListener implements MouseListener {
 		public void mouseExited(MouseEvent e) {
 			if (Controller.get().isEditing()) {
-				button.setOpaque(false);
-				button.setForeground(Color.BLACK);
+				button.setBackground(Color.decode(ColorManager.getBoxButtonBackground()));
+				button.setForeground(Color.decode(ColorManager.getBoxButtonText()));
 				button.revalidate();
 				button.repaint();
 			}
 		}
 		public void mouseEntered(MouseEvent e) {
 			if (Controller.get().isEditing()) {
-				button.setOpaque(true);
-				button.setForeground(Color.WHITE);
+				setBackground(Color.decode(ColorManager.getHighlighted()));
+				button.setForeground(Color.decode(ColorManager.getBoxButtonText()));
 				button.revalidate();
 				button.repaint();
 			}
 		}
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {
 			if (Controller.get().isEditing()) {
 				Controller.get().removeButton(buttonText);
 				Controller.get().toggleEditing();
@@ -58,7 +62,5 @@ public class BoxButton extends JLabel {
 				Controller.get().addToList(send);
 			}
 		}
-		public void mousePressed(MouseEvent e) {}
-		public void mouseReleased(MouseEvent e) {}
 	}
 }

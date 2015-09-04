@@ -4,6 +4,9 @@ import java.awt.event.*;
 
 public class SaveButton extends Button {
 	public SaveButton() {
+		setBackground(Color.decode(ColorManager.getSaveButtonBackground()));
+		setOpaque(true);
+		setForeground(Color.decode(ColorManager.getSaveButtonText()));
 		setText("SAVE");
 		addBorder();
 		this.addMouseListener(new BListener());
@@ -13,10 +16,11 @@ public class SaveButton extends Button {
 		public void mouseExited(MouseEvent e) {}
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseClicked(MouseEvent e) {
-			Controller.get().save();
 		}
 		public void mousePressed(MouseEvent e) {}
-		public void mouseReleased(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {
+			Controller.get().save();
+		}
 
 	}
 

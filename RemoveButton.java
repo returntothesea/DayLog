@@ -6,8 +6,9 @@ public class RemoveButton extends Button {
 	private static RemoveButton button;
 	private Boolean off = true;
 	public RemoveButton() {
+		setForeground(Color.decode(ColorManager.getRemoveButtonText()));
 		button = this;
-		setBackground(Color.RED);
+		setBackground(Color.decode(ColorManager.getRemoveButtonBackground()));
 		setText("Remove a button");
 		addBorder();
 		this.addMouseListener(new BListener());
@@ -16,7 +17,9 @@ public class RemoveButton extends Button {
 	public class BListener implements MouseListener {
 		public void mouseExited(MouseEvent e) {}
 		public void mouseEntered(MouseEvent e) {}
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {
 			if (off) {
 				colorFlip();
 
@@ -30,8 +33,6 @@ public class RemoveButton extends Button {
 				off = true;
 			}
 		}
-		public void mousePressed(MouseEvent e) {}
-		public void mouseReleased(MouseEvent e) {}
 	}
 
 	public RemoveButton get() {
@@ -41,10 +42,14 @@ public class RemoveButton extends Button {
 	public static void colorFlip() {
 		if (button.isOpaque() == true) {
 			button.setOpaque(false);
-			button.setForeground(Color.BLACK);
+			button.setForeground(Color.decode(ColorManager.getRemoveButtonText()));
+			button.revalidate();
+			button.repaint();
 		} else {
 			button.setOpaque(true);
-			button.setForeground(Color.WHITE);
+			button.setForeground(Color.decode(ColorManager.getRemoveButtonText()));
+			button.revalidate();
+			button.repaint();
 		}
 	}
 }
