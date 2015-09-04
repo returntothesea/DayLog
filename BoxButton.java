@@ -12,7 +12,12 @@ import java.util.Calendar;
 public class BoxButton extends JLabel {
 	String buttonText;
 	BoxButton button;
+
+	// Visual setup
 	public BoxButton(String s) {
+		Font labelFont = this.getFont();
+		setFont(new Font(labelFont.getName(), Font.PLAIN, 16));
+
 		setForeground(Color.decode(ColorManager.getBoxButtonText()));
 		setBackground(Color.decode(ColorManager.getBoxButtonBackground()));
 		setOpaque(true);
@@ -29,8 +34,10 @@ public class BoxButton extends JLabel {
 
 		this.addMouseListener(new BListener());
 	}
-
+	// Mouse interaction
 	public class BListener implements MouseListener {
+
+		// Highlight when mouse hovers over.
 		public void mouseExited(MouseEvent e) {
 				button.setBackground(Color.decode(ColorManager.getBoxButtonBackground()));
 				button.setForeground(Color.decode(ColorManager.getBoxButtonText()));
@@ -52,8 +59,13 @@ public class BoxButton extends JLabel {
 		}
 		public void mouseClicked(MouseEvent e) {}
 		public void mousePressed(MouseEvent e) {}
-		public void mouseReleased(MouseEvent e) {
 
+		// Check to see whether Controller is set to button-editing mode.
+		// If it is, remove button on release and flip 'remove' button back to resting color.
+		// If it isn't in editing mode, check to see if the current Date is the same as the
+		// date file that's currently open. Make and open a new file if necessary, otherwise
+		// send to the LogPanel.
+		public void mouseReleased(MouseEvent e) {
 			if (Controller.get().isEditing()) {
 				Controller.get().removeButton(buttonText);
 				Controller.get().toggleEditing();

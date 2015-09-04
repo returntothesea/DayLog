@@ -20,9 +20,12 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+// |--------------------------------------------------------|
+// | Controller. Used for most app operations. Set up with	|
+// | private constructor and single instance accessor.		|
+// |--------------------------------------------------------|
 
 public class Controller {
-
 	ArrayList<String> al;
 	ArrayList<String> buttonsList;
 	DateFormat fileNameFormat;
@@ -48,10 +51,9 @@ public class Controller {
 		return instance;
 	}
 
+	// Get pointers to the instances of necessary parts, then call setup methods for
+	// them.
 	public void setup() {
-		
-		
-
 		mainPanel = MainPanel.get();
 		logPanel = LogPanel.get();
 		botPanel = BotPanel.get();
@@ -87,6 +89,8 @@ public class Controller {
 		//mainPanel.repaint();
 	}
 
+	// Separate 'populate' method so that it can be used outside of the setup method
+	// when you make a new button.
 	private void populateMainPanel() {
 		for (int x = 0; x < buttonsList.size(); x++) {
 			mainPanel.add(new BoxButton(buttonsList.get(x)));
@@ -95,6 +99,7 @@ public class Controller {
 		mainPanel.repaint();
 	}
 
+	// Make a new .txt file named with current date. If one exists already, just open it instead.
 	public void logSetup() {
 		date = new Date();
 		fileNameFormat = new SimpleDateFormat("yyyy-MM-dd");	// Format for the date on the file name.
@@ -120,6 +125,7 @@ public class Controller {
 		populateLogPanel();
 	}
 
+	// Separate 'populate' method so it can be used outside of the setup method.
 	private void populateLogPanel() {
 		for (int x = 0; x < al.size(); x++) {
 			logPanel.add(new LogItem(al.get(x)));
@@ -128,6 +134,7 @@ public class Controller {
 		logPanel.repaint();
 	}
 
+	// Called to remove an item from the log's arraylist, then to reload the LogPanel.
 	public void removeItem(String s) {
 		if (al.contains(s)) {
 			al.remove(s);
@@ -136,9 +143,12 @@ public class Controller {
 		populateLogPanel();
 	}
 
+	//----------------------------------------------------------------
+	// Used for testing in place of further action to test progress.
 	public static void ping() {
 		System.out.println("pinged\n\n");
 	}
+	//----------------------------------------------------------------
 
 	public void addToList(String s) {
 		al.add(0, s);

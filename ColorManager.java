@@ -1,3 +1,8 @@
+// |----------------------------------------------------------------|
+// | Color Manager.						   							|
+// | Holds hex codes for easy changing of the color scheme. 	   	|
+// | Accessor methods for getting the hex codes from around the app	|
+// |----------------------------------------------------------------|
 public class ColorManager {
 	private static final String LOG_PANEL_BACKGROUND = "#00577b";
 	private static final String LOG_PANEL_TEXT = "#FEFBF7";
