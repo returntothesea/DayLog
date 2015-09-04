@@ -12,7 +12,7 @@ public class LogItem extends JLabel {
 		setForeground(Color.decode(ColorManager.getLogPanelText()));
 		text = s;
 		setText(s);
-		Border b = BorderFactory.createEmptyBorder(3, 0, 3, 0);
+		Border b = BorderFactory.createEmptyBorder(3, 3, 3, 0);
 		setBorder(b);
 		item = this;
 		this.addMouseListener(new BListener());

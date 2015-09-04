@@ -50,16 +50,24 @@ public class BoxButton extends JLabel {
 		public void mouseClicked(MouseEvent e) {}
 		public void mousePressed(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {
+
 			if (Controller.get().isEditing()) {
 				Controller.get().removeButton(buttonText);
 				Controller.get().toggleEditing();
 				RemoveButton.colorFlip();
 			} else {
-				DateFormat timeStampFormat = new SimpleDateFormat("hh:mm a");
+				DateFormat dayCheckFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date time = new Date();
-				String stamp = new String(timeStampFormat.format(time));
-				String send = new String("[" + stamp + "] " + buttonText);
-				Controller.get().addToList(send);
+				String check = new String(dayCheckFormat.format(time) + ".txt");
+				if(check.equals(Controller.get().fileCurrentlyInUse())) {
+					DateFormat timeStampFormat = new SimpleDateFormat("hh:mm a");
+					String stamp = new String(timeStampFormat.format(time));
+					String send = new String("[" + stamp + "] " + buttonText);
+					Controller.get().addToList(send);
+				} else {
+					Controller.get().clearLog();
+					Controller.get().logSetup();
+				}
 			}
 		}
 	}

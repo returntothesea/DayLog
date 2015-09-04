@@ -33,6 +33,7 @@ public class Controller {
 	LogPanel logPanel;
 	BotPanel botPanel;
 	NewPanel newPanel;
+
 	private Boolean editing = false;
 
 	private static Controller instance;
@@ -48,12 +49,8 @@ public class Controller {
 	}
 
 	public void setup() {
-		date = new Date();
-		fileNameFormat = new SimpleDateFormat("yyyy-MM-dd");	// Format for the date on the file name.
-		fileName = new String((fileNameFormat.format(date)) + ".txt");	// Actual file name
-		file = new File("logs/" + fileName);	// Path for the file.
-
-		al = new ArrayList<String>();
+		
+		
 
 		mainPanel = MainPanel.get();
 		logPanel = LogPanel.get();
@@ -98,7 +95,13 @@ public class Controller {
 		mainPanel.repaint();
 	}
 
-	private void logSetup() {
+	public void logSetup() {
+		date = new Date();
+		fileNameFormat = new SimpleDateFormat("yyyy-MM-dd");	// Format for the date on the file name.
+		fileName = new String((fileNameFormat.format(date)) + ".txt");	// Actual file name
+		file = new File("logs/" + fileName);	// Path for the file.
+		al = new ArrayList<String>();
+		
 		try {
 			if (!file.exists()) {
 				file.createNewFile();
@@ -207,5 +210,13 @@ public class Controller {
 			buttonsList.remove(s);
 		}
 		reload();
+	}
+
+	public String fileCurrentlyInUse() {
+		return fileName;
+	}
+
+	public void clearLog() {
+		logPanel.removeAll();
 	}
 }
