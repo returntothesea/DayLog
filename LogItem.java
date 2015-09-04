@@ -29,7 +29,7 @@ public class LogItem extends JLabel {
 		public void mouseEntered(MouseEvent e) {
 			item.setOpaque(true);
 			item.setForeground(Color.WHITE);
-			item.setText("DELETE ITEM                                ");
+			item.setText("DELETE ITEM                                                   ");
 			item.revalidate();
 			item.repaint();
 		}
