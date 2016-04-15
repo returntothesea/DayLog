@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 public class RemoveButton extends Button {
 	private static RemoveButton button;
-	private Boolean off = true;
+	private boolean off = true;
 	public RemoveButton() {
 		setForeground(Color.decode(ColorManager.getRemoveButtonText()));
 		button = this;

@@ -21,10 +21,6 @@ public class Run {
 		frame.add(panel);
 
 
-		//frame.add(MainPanel.get(), BorderLayout.CENTER);
-		//frame.add(BotPanel.get(), BorderLayout.SOUTH);
-
-
 		Controller con = Controller.get();		// Controller sets up the panels
 		con.setup();
 

@@ -1,6 +1,5 @@
 Tank went out.
 Tank ate.
-Tank had meds.
-Maren ate.
 Maren went to sleep.
-Maren woke up.
+Maren did something.
+Maren was born!

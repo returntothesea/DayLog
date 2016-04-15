@@ -37,7 +37,7 @@ public class Controller {
 	BotPanel botPanel;
 	NewPanel newPanel;
 
-	private Boolean editing = false;
+	private boolean editing = false;
 
 	private static Controller instance;
 
